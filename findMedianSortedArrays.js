@@ -27,6 +27,7 @@ var findMedianSortedArrays = function (nums1, nums2) {
   console.time("Hard");
   const hard = findMedianSortedArraysHard(nums1, nums2);
   console.timeEnd("Hard");
+
   return { easy, hard };
 };
 
