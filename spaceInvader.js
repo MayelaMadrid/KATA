@@ -1,22 +1,24 @@
-let alienWave = [[3, 1, 2, -2, 2, 3, 6, -3, 7, 1]];
-let position = [6, 4];
+// let alienWave = [[3, 1, 2, -2, 2, 3, 6, -3, 7, 1]];
+// let position = [6, 4];
+// [0,2,3,4,5,9,10,13,19,22]
+// [0,2,3,4,5,9,10,13,19,22]
 
-// let alienWave = [
-//   [5, 2, -2, 3, 1, 0, 4, 8, 3, -2, 5],
-//   [1, 4, -1, 0, 3, 6, 1, -3, 1, 2, -4],
-// ];
-//[1,4,5,6,8,9,10,12,14,15,16,18,19,20,21,26,27,30,32,36]);
-//[1,4,5,6,8,9,10,12,13,14,15,16,17,19,20,21,27,30,32,36]
-// let position = [10, 2];
+let alienWave = [
+  [5, 2, -2, 3, 1, 0, 4, 8, 3, -2, 5],
+  [1, 4, -1, 0, 3, 6, 1, -3, 1, 2, -4],
+];
+// [1,4,5,6,8,9,10,12,14,15,16,18,19,20,21,26,27,30,32,36]
+// [1,4,5,6,8,9,10,12,13,14,15,16,17,19,20,21,27,30,32,36]
+let position = [10, 2];
 
-// let alienWave = [
-//   [4, 1, -7, -5, 1, 6, 3, -2, 1, 0, 2, 6, 5],
-//   [2, 0, 3, -4, 0, 2, -1, 5, -8, -3, -2, -5, 1],
-//   [1, 2, 0, -6, 4, 7, -2, 4, -4, 2, -5, 0, 4],
-// ];
-// let position = [15, 6];
-//[0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,17,18,19,21,22,23,25,27,30,31,32,35,36,38,40,43,45,56,58]
-//[0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,17,18,19,21,22,23,25,27,30,31,32,35,36,38,40,43,45,56,58]
+// // let alienWave = [
+// //   [4, 1, -7, -5, 1, 6, 3, -2, 1, 0, 2, 6, 5],
+// //   [2, 0, 3, -4, 0, 2, -1, 5, -8, -3, -2, -5, 1],
+// //   [1, 2, 0, -6, 4, 7, -2, 4, -4, 2, -5, 0, 4],
+// // ];
+// // let position = [15, 6];
+// // [0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,17,18,19,21,22,23,25,27,30,31,32,35,36,38,40,43,45,56,58]
+// // [0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,17,18,19,21,22,23,25,27,30,31,32,35,36,38,40,43,45,56,58]
 
 let turn = 0;
 let blastSqc = [];
@@ -105,6 +107,8 @@ const changePositionInvasor = (waveTmp, pst, elementstoCheck) => {
   }
   console.log(JSON.stringify(waveTmp));
   const checkedShot = checkShot(waveTmp, position);
+  console.log(JSON.stringify(checkedShot));
+
   return checkedShot;
 };
 
@@ -114,6 +118,7 @@ function concatArray(newArr, length, pst) {
   }
   return newArr;
 }
+
 function checkShot(waveTmp, pst) {
   let newArray = [],
     flag = false;
@@ -152,7 +157,11 @@ const blastSequence = (alienW, pst) => {
     console.log("TURNO", turn);
     waveTmp = changePositionInvasor(waveTmp, pst, elementstoCheck);
     console.log(blastSqc);
-    if (waveTmp.flat().every((idx) => idx == 0)) clearInterval(intervalShot);
+    if (
+      waveTmp.flat().every((idx) => idx == 0) ||
+      waveTmp[pst[0] - 2].flat().every((idx) => idx != 0).length
+    )
+      clearInterval(intervalShot);
   };
   intervalShot = setInterval(shotSqc, 1000);
 };
