@@ -1,15 +1,15 @@
-// let alienWave = [[3, 1, 2, -2, 2, 3, 6, -3, 7, 1]];
-// let position = [6, 4];
+let alienWave = [[3, 1, 2, -2, 2, 3, 6, -3, 7, 1]];
+let position = [6, 4];
 // [0,2,3,4,5,9,10,13,19,22]
 // [0,2,3,4,5,9,10,13,19,22]
 
-let alienWave = [
-  [5, 2, -2, 3, 1, 0, 4, 8, 3, -2, 5],
-  [1, 4, -1, 0, 3, 6, 1, -3, 1, 2, -4],
-];
+//let alienWave = [
+// [5, 2, -2, 3, 1, 0, 4, 8, 3, -2, 5],
+//[1, 4, -1, 0, 3, 6, 1, -3, 1, 2, -4],
+//];
 // [1,4,5,6,8,9,10,12,14,15,16,18,19,20,21,26,27,30,32,36]
 // [1,4,5,6,8,9,10,12,13,14,15,16,17,19,20,21,27,30,32,36]
-let position = [10, 2];
+//let position = [10, 2];
 
 // // let alienWave = [
 // //   [4, 1, -7, -5, 1, 6, 3, -2, 1, 0, 2, 6, 5],
@@ -24,21 +24,20 @@ let turn = 0;
 let blastSqc = [];
 
 const getValue = (value) => {
-  if (Array.isArray(value)) {
+  if (Array.isArray(value))
     return !isNaN(value[0]) ? { value: value[0], turn: 0 } : value[0];
-  }
   return { value, turn: 0 };
 };
-const minusNextArr = (index, value) =>
-  alienWave[0].length - (value - (alienWave[0].length - (index + 1)));
 
-const checkIndex = (waveTmp, i, index, value, newIndex) => {
-  if (Array.isArray(waveTmp[i][newIndex])) {
+const minusNextArr = (index, value) => -value + (2 * alienWave[0].length) - index - 1
+
+const checkIndex = (waveTmp, i, value, newIndex) => {
+  if (Array.isArray(waveTmp[i][newIndex]))
     return [...waveTmp[i][newIndex], { value, turn }];
-  }
-  if (waveTmp[i][newIndex] != 0) {
+
+  if (waveTmp[i][newIndex] != 0)
     return [waveTmp[i][newIndex], { value, turn }];
-  }
+
   return [{ value, turn }];
 };
 
@@ -49,12 +48,10 @@ const setValue = (val) => {
   return 0;
 };
 
-const changePositionInvasor = (waveTmp, pst, elementstoCheck) => {
-  let elements = 0,
-    i = 0,
-    k = 0;
+const changePositionInvasor = (waveTmp, pst, itemstoCheck) => {
+  let items = 0, i = 0, k = 0;
 
-  while (elements < elementstoCheck && i < pst[0] - 1) {
+  while (items < itemstoCheck && i < pst[0] - 1) {
     const { value, turn: currently } = getValue(waveTmp[i][k]);
     if (k == waveTmp[0].length) {
       i++;
@@ -67,45 +64,24 @@ const changePositionInvasor = (waveTmp, pst, elementstoCheck) => {
     }
     if (value > 0) {
       if (waveTmp[0].length <= k + value) {
-        waveTmp[i + 1][minusNextArr(k, value)] = checkIndex(
-          waveTmp,
-          i + 1,
-          k,
-          -value,
-          minusNextArr(k, value)
-        );
+        waveTmp[i + 1][minusNextArr(k, value)] = checkIndex(waveTmp, i + 1, -value, minusNextArr(k, value));
       } else {
-        waveTmp[i][k + value] = checkIndex(waveTmp, i, k, value, k + value);
+        waveTmp[i][k + value] = checkIndex(waveTmp, i, value, k + value);
       }
     } else {
       if (k - Math.abs(value) < 0) {
-        waveTmp[i + 1][Math.abs(value + k) - 1] = checkIndex(
-          waveTmp,
-          i + 1,
-          k,
-          Math.abs(value),
-          Math.abs(value + k) - 1
-        );
+        waveTmp[i + 1][Math.abs(value + k) - 1] = checkIndex(waveTmp, i + 1, Math.abs(value), Math.abs(value + k) - 1);
       } else {
-        waveTmp[i][k - Math.abs(value)] = checkIndex(
-          waveTmp,
-          i,
-          k,
-          value,
-          k - Math.abs(value)
+        waveTmp[i][k - Math.abs(value)] = checkIndex(waveTmp, i, value, k - Math.abs(value)
         );
       }
     }
-    elements++;
+    items++;
 
     waveTmp[i][k] = setValue(waveTmp[i][k]);
-    if (Array.isArray(waveTmp[i][k]) && waveTmp[i][k][0].turn != turn) {
-      k--;
-      continue;
-    }
+    if (Array.isArray(waveTmp[i][k]) && waveTmp[i][k][0].turn != turn) continue;
     k++;
   }
-  console.log(JSON.stringify(waveTmp));
   const checkedShot = checkShot(waveTmp, position);
   console.log(JSON.stringify(checkedShot));
 
@@ -120,28 +96,18 @@ function concatArray(newArr, length, pst) {
 }
 
 function checkShot(waveTmp, pst) {
-  let newArray = [],
-    flag = false;
+  let newArray = [], cut, flag = false;
   for (let i = pst[0] - 1; i >= 0; i--) {
-    for (let j = 0; j < waveTmp[0].length; j++) {
-      if (j == pst[1] && waveTmp[i][j] != 0 && !flag) {
-        console.log(waveTmp[i][j]);
-        blastSqc.push(turn - 1);
-        flag = true;
-        const sorted = waveTmp[i][j].sort((a, b) => a.value - b.value);
-        if (sorted.length > 1) {
-          let cut;
-          if (sorted[0].value > sorted[sorted.length - 1].value) {
-            cut = sorted.slice(1);
-          } else {
-            cut = sorted.slice(0, sorted.length - 1);
-          }
-
-          waveTmp[i][j] = cut;
-        } else {
-          waveTmp[i][j] = 0;
-        }
+    if (waveTmp[i][pst[1]] != 0 && !flag) {
+      blastSqc.push(turn - 1);
+      flag = true;
+      const sorted = waveTmp[i][pst[1]].sort((a, b) => a.value - b.value);
+      if (Math.abs(sorted[0].value) > sorted[sorted.length - 1].value) {
+        cut = sorted.slice(1);
+      } else {
+        cut = sorted.slice(0, sorted.length - 1);
       }
+      waveTmp[i][pst[1]] = cut && cut.length ? cut : 0;
     }
     newArray.unshift(waveTmp[i]);
   }
@@ -150,18 +116,16 @@ function checkShot(waveTmp, pst) {
 
 const blastSequence = (alienW, pst) => {
   let intervalShot;
+  const itemstoCheck = alienW.flat().filter(idx => idx != 0).length;
   let waveTmp = concatArray(alienW, alienW[0].length, pst);
-  const elementstoCheck = alienW.flat().length;
   const shotSqc = () => {
     turn++;
     console.log("TURNO", turn);
-    waveTmp = changePositionInvasor(waveTmp, pst, elementstoCheck);
-    console.log(blastSqc);
-    if (
-      waveTmp.flat().every((idx) => idx == 0) ||
-      waveTmp[pst[0] - 2].flat().every((idx) => idx != 0).length
-    )
+    waveTmp = changePositionInvasor(waveTmp, pst, itemstoCheck);
+    if (waveTmp.flat().every((idx) => idx == 0) || waveTmp[pst[0] - 2].every((idx) => idx != 0)) {
       clearInterval(intervalShot);
+      console.log(blastSqc);
+    }
   };
   intervalShot = setInterval(shotSqc, 1000);
 };
