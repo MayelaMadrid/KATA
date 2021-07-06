@@ -1,7 +1,5 @@
-const defaultIndex = 0;
-
 export default class KeyBoard {
-  constructor(uimanager, index = defaultIndex) {
+  constructor(uimanager, index) {
     this.index = index;
     this.lastIndex = index;
     this.uimanager = uimanager;
@@ -28,7 +26,7 @@ export default class KeyBoard {
 
   left() {
     this.activeSelector(
-      ![0, 6].includes(this.index) ? this.index - 1 : this.index - 5
+      ![0, 6].includes(this.index) ? this.index - 1 : this.index + 5
     );
   }
 

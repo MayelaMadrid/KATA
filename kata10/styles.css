@@ -16,7 +16,9 @@ body {
   color: #f8b801;
   text-align: end;
   border: #bc4a2f;
-  text-shadow: 2px 0 0 #bc4a2f, -2px 0 0 #bc4a2f, 0 2px 0 #bc4a2f, 0 -2px 0 #bc4a2f, 1px 1px #bc4a2f, -1px -1px 0 #bc4a2f, 1px -1px 0 #bc4a2f, -1px 1px 0 #bc4a2f;
+  text-shadow: 2px 0 0 #bc4a2f, -2px 0 0 #bc4a2f, 0 2px 0 #bc4a2f,
+    0 -2px 0 #bc4a2f, 1px 1px #bc4a2f, -1px -1px 0 #bc4a2f, 1px -1px 0 #bc4a2f,
+    -1px 1px 0 #bc4a2f;
 }
 
 .grid-map {
@@ -30,100 +32,97 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 }
-
-.grid-map > img {
-  padding-bottom: 37%;
+.name-portrait {
+  position: fixed;
+  bottom: 65%;
 }
-.grid-map>div{
-    width: 100%;
-    text-align: left;
-    display: grid;
-}
-.grid-map>div>img:first-child{
-    margin-left: 37px;
+.player {
+  position: fixed;
+  bottom: 69%;
+  left: 27%;
 }
 .grid-icon {
   grid-area: 3/1/3/2;
-
 }
 .grid-selection {
   grid-area: 3/2/3/3;
   height: 130px;
   display: flex;
   flex-flow: wrap;
-  align-self: flex-end;
+  align-self: center;
   background-color: #777776;
   position: relative;
 }
-.grid-selection>img{
+.grid-selection > img {
   margin: 2px;
 }
-.brazil{
-    top: 62.5%;
-    left: 75.5%;
+.brazil {
+  top: 62.7%;
+  left: 75.2%;
 }
-.china{
-  top: 15.2%;
-  left: 42.1%;
+.china {
+  top: 15.4%;
+  left: 42.3%;
 }
-.india{
+.india {
   top: 42.5%;
-  left: 26%;
+  left: 26.5%;
 }
-.japan-honda{
+.japan-honda {
   top: 24.2%;
   right: 35.2%;
 }
-.japan-ryu{
+.japan-ryu {
   top: 48.2%;
   right: 39.2%;
 }
-.spain{
+.spain {
   top: 10.2%;
   left: 7.2%;
 }
-.thailand{
+.thailand {
   top: 59%;
   left: 39.5%;
 }
-.usa-guile{
+.usa-guile {
   top: 17.2%;
-    right: 22.9%;
+  right: 22.9%;
 }
-.usa-ken{
+.usa-ken {
   top: 10.2%;
   right: 9.8%;
 }
-.usa-balrog{
+.usa-balrog {
   top: 39.2%;
-  right: 8.3%;
+  right: 9%;
 }
-.ussr{
+.ussr {
   top: 17.2%;
   left: 24.2%;
 }
 
-.flag{
+.flag {
   position: absolute;
 }
-.hidden{
+.hidden {
   visibility: hidden;
 }
 
 .flash {
   animation: opacity 0.5s infinite;
   opacity: 1;
+  height: 72px;
   position: absolute;
   margin: 0 !important;
   top: -6%;
-  left:0%;
+  left: 0%;
 }
 
 @keyframes opacity {
-0% {
-  opacity: 1;
-}
-100% {
-  opacity: 0;
-}
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

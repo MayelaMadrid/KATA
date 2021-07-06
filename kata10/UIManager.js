@@ -1,47 +1,49 @@
-import Player from "./Player.js";
+import Character from "./Character.js";
 import Selector from "./Selector.js";
-const dataPlayers = [
-  { player: "Balrog", flag: "USA" },
-  { player: "Blanka", flag: "Brazil" },
-  { player: "ChunLi", flag: "China" },
-  { player: "Dhalsim", flag: "India" },
-  { player: "Guile", flag: "USA" },
-  { player: "Honda", flag: "Japan" },
-  { player: "Ken", flag: "USA" },
-  { player: "Ryu", flag: "Japan" },
-  { player: "Sagat", flag: "ThaiLand" },
-  { player: "Vega", flag: "Spain" },
-  { player: "VIson", flag: "ThaiLand" },
-  { player: "Zangief", flag: "USSR" },
+const dataCharacters = [
+  { character: "Balrog", flag: "USA" },
+  { character: "Blanka", flag: "Brazil" },
+  { character: "ChunLi", flag: "China" },
+  { character: "Dhalsim", flag: "India" },
+  { character: "Guile", flag: "USA" },
+  { character: "Honda", flag: "Japan" },
+  { character: "Ken", flag: "USA" },
+  { character: "Ryu", flag: "Japan" },
+  { character: "Sagat", flag: "ThaiLand" },
+  { character: "Vega", flag: "Spain" },
+  { character: "VIson", flag: "ThaiLand" },
+  { character: "Zangief", flag: "USSR" },
 ];
 export default class UIManager {
-  constructor() {
-    this.players = [];
+  constructor(defaultIndex) {
+    this.characters = [];
+    this.defaultIndex = defaultIndex;
     this.selector = new Selector();
   }
 
-  drawPlayersAndFlags() {
+  drawCharactersAndFlags() {
     const map = document.getElementById("map");
     const selectionContainer =
       document.getElementsByClassName("grid-selection")[0];
-    let newPlayers = [];
-    for (let item of dataPlayers) {
-      const player = new Player(item.player, item.flag);
-      selectionContainer.appendChild(player.drawPlayer);
-      map.appendChild(player.drawFlag);
-      newPlayers = [...newPlayers, player];
+    let newCharacters = [];
+    for (let item of dataCharacters) {
+      const character = new Character(item.character, item.flag);
+      selectionContainer.appendChild(character.drawCharacter);
+      map.appendChild(character.drawFlag);
+      newCharacters = [...newCharacters, character];
     }
-    this.players = newPlayers;
+    this.characters = newCharacters;
     selectionContainer.appendChild(this.selector.draw);
   }
 
   drawSelection(lastIndex, idx) {
-    this.players[idx].onFocus();
-    this.players[lastIndex].onBlur();
+    this.characters[idx].onFocus();
+    this.characters[lastIndex].onBlur();
     this.selector.changePosition(idx);
   }
 
   run() {
-    this.drawPlayersAndFlags();
+    this.drawCharactersAndFlags();
+    this.drawSelection(this.defaultIndex, this.defaultIndex);
   }
 }
