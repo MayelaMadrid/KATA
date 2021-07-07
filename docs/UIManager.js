@@ -44,6 +44,7 @@ export default class UIManager {
 
   run() {
     this.drawCharactersAndFlags();
-    this.drawSelection(this.defaultIndex, this.defaultIndex);
+    this.characters[this.defaultIndex].onFocus();
+    this.selector.changePosition(this.defaultIndex);
   }
 }

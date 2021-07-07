@@ -21,8 +21,8 @@ export default class Selector {
   }
 
   calculateNewLeft() {
-    if (this.index < 6) return this.index * 17 + "%";
-    return (this.index - 6) * 17 + "%";
+    if (this.index < 6) return this.index * 40 + "px";
+    return (this.index - 6) * 40 + "px";
   }
 
   calculateNewTop() {
