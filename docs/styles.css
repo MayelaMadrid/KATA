@@ -19,7 +19,21 @@ body {
     0 -2px 0 #bc4a2f, 1px 1px #bc4a2f, -1px -1px 0 #bc4a2f, 1px -1px 0 #bc4a2f,
     -1px 1px 0 #bc4a2f;
 }
+@keyframes changeLetter {
+  0% {
+    content: "PRESS";
+  }
+  50% {
+  }
+  100% {
+    content: "START";
+  }
+}
 
+.changeLetter::after {
+  animation: changeLetter 2s linear infinite alternate;
+  content: "PRESS";
+}
 .grid-map {
   display: flex;
   justify-content: space-between;
@@ -125,8 +139,10 @@ body {
 @keyframes opacity {
   0% {
     opacity: 1;
+    display: none;
   }
   100% {
     opacity: 0;
+    display: block;
   }
 }
