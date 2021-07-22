@@ -1,18 +1,18 @@
 import Character from "./Character.js";
 import Selector from "./Selector.js";
 const dataCharacters = [
-  { character: "Balrog", flag: "USA" },
-  { character: "Blanka", flag: "Brazil" },
-  { character: "ChunLi", flag: "China" },
-  { character: "Dhalsim", flag: "India" },
-  { character: "Guile", flag: "USA" },
-  { character: "Honda", flag: "Japan" },
-  { character: "Ken", flag: "USA" },
   { character: "Ryu", flag: "Japan" },
-  { character: "Sagat", flag: "ThaiLand" },
+  { character: "Honda", flag: "Japan" },
+  { character: "Blanka", flag: "Brazil" },
+  { character: "Guile", flag: "USA" },
+  { character: "Balrog", flag: "USA" },
   { character: "Vega", flag: "Spain" },
-  { character: "VIson", flag: "ThaiLand" },
+  { character: "Ken", flag: "USA" },
+  { character: "ChunLi", flag: "China" },
   { character: "Zangief", flag: "USSR" },
+  { character: "Dhalsim", flag: "India" },
+  { character: "Sagat", flag: "ThaiLand" },
+  { character: "VIson", flag: "ThaiLand" },
 ];
 export default class UIManager {
   constructor(defaultIndex) {
